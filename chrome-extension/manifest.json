@@ -1,0 +1,14 @@
+{
+	"name": "connpass owner helper",
+	"version": "0.1.0",
+	"manifest_version": 2,
+	"description": "http://connpass.com/ のイベント管理者用サポートツール",
+	"content_scripts": [{
+		"matches": [
+			"http://connpass.com/event/*/participants/*"
+		],
+		"js": [
+			"count_questionnaire.js"
+		]
+	}]
+}
