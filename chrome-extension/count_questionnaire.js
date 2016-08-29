@@ -14,32 +14,40 @@
 	container.style.border = "2px gray solid";
 	document.body.appendChild(container);
 
-	const questions = Array.from(document.querySelector(".participation_table_area .ParticipantView .enquete_area.Answers").querySelectorAll(".question")).map(questionElem => {
-		return questionElem.innerText;
-	});
-	const answerCountResults = Array.from(document.querySelectorAll(".participation_table_area .ParticipantView .enquete_area.Answers")).map(elem => {
-		return Array.from(elem.querySelectorAll(".answer")).map(answerElem => {
-			return answerElem.innerText;
+	Array.from(document.querySelectorAll(".participation_table_area .ParticipantView .enquete_area.Answers")).map(elem => {
+		const questions = elem.querySelectorAll(".question");
+		return Array.from(elem.querySelectorAll(".answer")).map((answerElem, i) => {
+			return {
+				question: questions[i].innerText,
+				answer: answerElem.innerText
+			};
 		});
-	}).reduce((results, answers) => {
-		answers.forEach((answer, i) => {
-			if (!results[i]) results[i] = {};
-			const result = results[i];
-			if (answer in result) result[answer]++;
-			else result[answer] = 1;
-		});
+	}).reduce((flat, toFlatten) => {
+		// flatten
+		return flat.concat(toFlatten);
+	}).reduce((results, enquete) => {
+		let result = results.find(_ => _.question === enquete.question);
+		if (!result) {
+			result = {
+				question: enquete.question,
+				answers: {}
+			};
+			results.push(result);
+		}
+		const answers = result.answers;
+		if (enquete.answer in answers) answers[enquete.answer]++;
+		else answers[enquete.answer] = 1;
 		return results;
-	}, []);
-
-	answerCountResults.forEach((result, i) => {
+	}, []).forEach(result => {
 		const containerLi = document.createElement("li");
-		containerLi.appendChild(document.createTextNode(questions[i]));
+		containerLi.appendChild(document.createTextNode(result.question));
 		const ul = document.createElement("ul");
 		ul.style.listStyleType = "disc";
 		ul.style.webkitPaddingStart = "20px";
 
-		Object.keys(result).forEach(key => {
-			const count = result[key];
+		const answers = result.answers;
+		Object.keys(answers).forEach(key => {
+			const count = answers[key];
 			const li = document.createElement("li");
 			li.innerText = `${key}: ${count}`;
 			ul.appendChild(li);
