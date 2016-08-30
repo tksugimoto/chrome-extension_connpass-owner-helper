@@ -14,10 +14,28 @@
 	container.style.border = "2px gray solid";
 	document.body.appendChild(container);
 
-	Array.from(document.querySelectorAll(".participation_table_area .ParticipantView .enquete_area.Answers")).map(elem => {
+
+	class AnswerCount {
+		constructor() {
+			this.participantCount = 0;
+			this.waitingCount = 0;
+		}
+
+		countUp(isWaiting) {
+			if (isWaiting) {
+				this.waitingCount++;
+			} else {
+				this.participantCount++;
+			}
+		}
+	}
+
+	Array.from(document.querySelectorAll(".ParticipantView .enquete_area.Answers")).map(elem => {
 		const questions = elem.querySelectorAll(".question");
+		const isWaiting = !!elem.closest(".waitlist_table_area");
 		return Array.from(elem.querySelectorAll(".answer")).map((answerElem, i) => {
 			return {
+				isWaiting: isWaiting,
 				question: questions[i].innerText,
 				answer: answerElem.innerText
 			};
@@ -35,8 +53,8 @@
 			results.push(result);
 		}
 		const answers = result.answers;
-		if (enquete.answer in answers) answers[enquete.answer]++;
-		else answers[enquete.answer] = 1;
+		if (!(enquete.answer in answers)) answers[enquete.answer] = new AnswerCount();
+		answers[enquete.answer].countUp(enquete.isWaiting);
 		return results;
 	}, []).forEach(result => {
 		const containerLi = document.createElement("li");
@@ -49,7 +67,8 @@
 		Object.keys(answers).forEach(key => {
 			const count = answers[key];
 			const li = document.createElement("li");
-			li.innerText = `${key}: ${count}`;
+			li.innerText = `${key}: ${count.participantCount} + ${count.waitingCount}`;
+			li.title = "回答: 参加者数 + 補欠者数";
 			ul.appendChild(li);
 		});
 
