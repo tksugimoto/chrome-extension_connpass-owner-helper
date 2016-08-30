@@ -9,6 +9,7 @@
 			"http://connpass.com/event/*/participants/*"
 		],
 		"js": [
+			"search-participant.js",
 			"count_questionnaire.js"
 		]
 	}]
