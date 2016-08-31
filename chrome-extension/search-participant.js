@@ -24,6 +24,9 @@
 			elem.style.display = isMatch ? "" : "none";
 		});
 	});
+	input.addEventListener("focus", () => {
+		input.select();
+	});
 	container.appendChild(input);
 	entryTable.parentNode.insertBefore(container, entryTable.nextElementSibling);
 
