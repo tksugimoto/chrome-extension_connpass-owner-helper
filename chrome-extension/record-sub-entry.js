@@ -17,7 +17,21 @@
 	const eventId = location.pathname.match(/^[/]event[/](\d+)/)[1];
 	const eventTitle = document.querySelector(".event_title").innerText;
 
+	const subCheckedinCountElem = document.createElement("span");
+	subCheckedinCountElem.innerText = 0;
+	{
+		const container = document.createElement("span");
+		container.title = "懇親会参加者数";
+		container.appendChild(document.createTextNode("（"));
+		container.appendChild(subCheckedinCountElem);
+		container.appendChild(document.createTextNode("人）"));
+
+		const parent = document.getElementById("CheckedinCount").parentNode;
+		parent.appendChild(container);
+	}
+
 	loadSavedEntryList(eventId).then(entryList => {
+		subCheckedinCountElem.innerText = entryList.length;
 		let promiseChain = Promise.resolve();
 
 		function updateEntryList(userId, userName, value) {
@@ -31,6 +45,7 @@
 						name: userName
 					});
 				}
+				subCheckedinCountElem.innerText = entryList.length;
 				return new Promise(resolve => {
 					chrome.storage.local.set({
 						[eventId]: entryList
