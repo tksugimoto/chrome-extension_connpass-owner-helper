@@ -6,9 +6,7 @@
 {
 	function loadSavedEntryList(eventId) {
 		return new Promise(resolve => {
-			chrome.storage.local.get({
-				[eventId]: []
-			}, items => {
+			chrome.storage.local.get(eventId, items => {
 				resolve(items[eventId]);
 			});
 		});
@@ -30,7 +28,7 @@
 		parent.appendChild(container);
 	}
 
-	loadSavedEntryList(eventId).then(entryList => {
+	loadSavedEntryList(eventId).then(({entryList = []} = {}) => {
 		subCheckedinCountElem.innerText = entryList.length;
 		let promiseChain = Promise.resolve();
 
@@ -48,7 +46,7 @@
 				subCheckedinCountElem.innerText = entryList.length;
 				return new Promise(resolve => {
 					chrome.storage.local.set({
-						[eventId]: entryList
+						[eventId]: {eventTitle, entryList}
 					}, resolve);
 				});
 			});
