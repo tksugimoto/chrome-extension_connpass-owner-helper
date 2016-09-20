@@ -32,7 +32,7 @@
 		subCheckedinCountElem.innerText = entryList.length;
 		let promiseChain = Promise.resolve();
 
-		function updateEntryList(userId, userName, value) {
+		function updateEntryList(userId, userDisplayName, value) {
 			promiseChain = promiseChain.then(() => {
 				entryList = entryList.filter(entry => {
 					return entry.id !== userId;
@@ -40,7 +40,7 @@
 				if (value) {
 					entryList.push({
 						id: userId,
-						name: userName
+						displayName: userDisplayName
 					});
 				}
 				subCheckedinCountElem.innerText = entryList.length;
@@ -67,9 +67,9 @@
 			elem.querySelector(".id").appendChild(label);
 
 			checkbox.addEventListener("change", evt => {
-				const userName = elem.getAttribute("data-username");
+				const userDisplayName = elem.getAttribute("data-username");
 				const value = checkbox.checked;
-				updateEntryList(userId, userName, value);
+				updateEntryList(userId, userDisplayName, value);
 			});
 		});
 	});
