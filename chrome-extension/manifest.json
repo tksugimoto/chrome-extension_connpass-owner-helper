@@ -4,11 +4,15 @@
 	"manifest_version": 2,
 	"description": "http://connpass.com/ のイベント管理者用サポートツール",
 	"key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5jj1wS2gCBK5jGpdbg+EZr5HUCd8h1oc54pk/3Ram90trwLM5+p3nx2JTaP+df5s8vkuuQUrIdFa44o1vjF+sfXqHtDt1cObsByH7E/PjdBQ3HXccbF+Opgc4oszeYXHhl/ylHwYMAOhbqKQZJ3KP3Gq38QW/ongpylStYBTiMxh65AiSZevzmmyD6OsSsQzY3MwMhUvCAOwK36XCiDg467qPjS2Aw2oHDFZlF9n8CfQWiD917+fxSAXGtc7uo3heVqfy8ikAn1LHrWS6/7ydqFeLTAVjbZT8jBFNNYRNNip3rOuL7s0WNJnH4fj0Q7Yypd7Gav0buHgdydqqNC1eQIDAQAB",
+	"permissions": [
+		"storage"
+	],
 	"content_scripts": [{
 		"matches": [
 			"http://connpass.com/event/*/participants/*"
 		],
 		"js": [
+			"record-sub-entry.js",
 			"search-participant.js",
 			"count_questionnaire.js"
 		]
