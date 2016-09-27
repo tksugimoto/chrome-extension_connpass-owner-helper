@@ -15,21 +15,42 @@
 	const eventId = location.pathname.match(/^[/]event[/](\d+)/)[1];
 	const eventTitle = document.querySelector(".event_title").innerText;
 
-	const subCheckedinCountElem = document.createElement("span");
-	subCheckedinCountElem.innerText = 0;
-	{
-		const container = document.createElement("span");
-		container.title = "懇親会参加者数";
-		container.appendChild(document.createTextNode("（"));
-		container.appendChild(subCheckedinCountElem);
-		container.appendChild(document.createTextNode("人）"));
-
-		const parent = document.getElementById("CheckedinCount").parentNode;
-		parent.appendChild(container);
-	}
-
 	loadSavedEntryList(eventId).then(({entryList = []} = {}) => {
+
+		const {
+			subCheckedinCountElem,
+			updateEntryListDownloadLink
+		} = (() => {
+			const subCheckedinCountElem = document.createElement("span");
+			const container = document.createElement("a");
+			container.href = "#";
+			container.target = "_blank";
+			container.download = `${eventTitle}-懇親会参加者一覧.json`;
+			container.title = "懇親会参加者数（クリックで一覧をダウンロード）";
+			container.appendChild(document.createTextNode("（"));
+			container.appendChild(subCheckedinCountElem);
+			container.appendChild(document.createTextNode("人）"));
+
+			const parent = document.getElementById("CheckedinCount").parentNode;
+			parent.appendChild(container);
+
+			const updateEntryListDownloadLink = (entryList) => {
+				let text = `懇親会参加者（${entryList.length}人）\n` + entryList.map(entry => entry.displayName).join("\n");
+				let blob = new Blob([
+					text
+				], {
+					type: "application/json"
+				});
+				container.href = window.URL.createObjectURL(blob);
+			};
+			return {
+				subCheckedinCountElem,
+				updateEntryListDownloadLink
+			};
+		})();
+
 		subCheckedinCountElem.innerText = entryList.length;
+		updateEntryListDownloadLink(entryList);
 		let promiseChain = Promise.resolve();
 
 		function updateEntryList(userId, userDisplayName, value) {
@@ -44,6 +65,7 @@
 					});
 				}
 				subCheckedinCountElem.innerText = entryList.length;
+				updateEntryListDownloadLink(entryList);
 				return new Promise(resolve => {
 					chrome.storage.local.set({
 						[eventId]: {eventTitle, entryList}
