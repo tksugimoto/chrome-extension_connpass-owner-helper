@@ -12,9 +12,9 @@
 			"*://connpass.com/event/*/participants/*"
 		],
 		"js": [
-			"record-sub-entry.js",
-			"search-participant.js",
-			"count_questionnaire.js"
+			"content_scripts/record-sub-entry.js",
+			"content_scripts/search-participant.js",
+			"content_scripts/count_questionnaire.js"
 		]
 	}]
 }
