@@ -9,7 +9,7 @@
 	],
 	"content_scripts": [{
 		"matches": [
-			"http://connpass.com/event/*/participants/*"
+			"*://connpass.com/event/*/participants/*"
 		],
 		"js": [
 			"record-sub-entry.js",
