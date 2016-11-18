@@ -58,7 +58,11 @@
 		return results;
 	}, []).forEach(result => {
 		const containerLi = document.createElement("li");
-		containerLi.appendChild(document.createTextNode(result.question));
+		const details = document.createElement("details");
+		const summary = document.createElement("summary");
+		summary.style.cursor = "pointer";
+		details.appendChild(summary);
+		summary.appendChild(document.createTextNode(result.question));
 		const ul = document.createElement("ul");
 		ul.style.listStyleType = "disc";
 		ul.style.webkitPaddingStart = "20px";
@@ -72,7 +76,8 @@
 			ul.appendChild(li);
 		});
 
-		containerLi.appendChild(ul);
+		details.appendChild(ul);
+		containerLi.appendChild(details);
 		container.appendChild(containerLi);
 	});
 }
