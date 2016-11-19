@@ -13,10 +13,10 @@ Setting.get("search_participant").then(isEnabled => {
 	});
 	const entryTable = document.querySelector(".entirety_area ");
 	const container = document.createElement("div");
+	container.style.margin = "auto";
+	container.style.textAlign = "center";
 	const input = document.createElement("input");
 	input.style.width = "80%";
-	input.style.display = "block";
-	input.style.margin = "auto";
 	input.placeholder = "受付番号・参加者名・IDで検索（大文字小文字無視）";
 	input.addEventListener("keyup", () => {
 		const value = input.value.toLocaleLowerCase();
@@ -29,6 +29,20 @@ Setting.get("search_participant").then(isEnabled => {
 		input.select();
 	});
 	container.appendChild(input);
+
+	const clearButton = document.createElement("input");
+	clearButton.type = "button";
+	clearButton.value = "クリア"
+	clearButton.style.cursor = "pointer";
+	clearButton.addEventListener("click", () => {
+		input.value = "";
+		participants.forEach(({elem}) => {
+			elem.style.display = "";
+		});
+		input.focus();
+	});
+	container.appendChild(clearButton);
+
 	entryTable.parentNode.insertBefore(container, entryTable.nextElementSibling);
 
 	function getTextIfExist(elem, selector) {
