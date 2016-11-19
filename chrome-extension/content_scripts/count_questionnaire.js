@@ -9,8 +9,10 @@ Setting.get("count_questionnaire").then(isEnabled => {
 	container.style.listStyleType = "decimal";
 	container.style.webkitPaddingStart = "30px";
 	container.style.position = "fixed";
-	container.style.bottom = "10px";
+	container.style.maxHeight = "96%";
+	container.style.bottom = "2%";
 	container.style.right = "10px";
+	container.style.overflow = "auto";
 	container.style.background = "white";
 	container.style.border = "2px gray solid";
 	document.body.appendChild(container);
