@@ -20,7 +20,7 @@
 	input.addEventListener("keyup", () => {
 		const value = input.value.toLocaleLowerCase();
 		participants.forEach(({elem, number, displayName, userName}) => {
-			const isMatch = number.startsWith(value) || displayName.includes(value) || userName.includes(value);
+			const isMatch = number.includes(value) || displayName.includes(value) || userName.includes(value);
 			elem.style.display = isMatch ? "" : "none";
 		});
 	});
