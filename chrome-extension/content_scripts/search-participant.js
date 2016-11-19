@@ -3,7 +3,8 @@
 申込者の管理ページで検索機能（受付時の確認を楽にする）
 */
 
-{
+Setting.get("search_participant").then(isEnabled => {
+	if (!isEnabled) return;
 	const participants = Array.from(document.querySelectorAll(".ParticipantView")).map(elem => {
 		const number = getTextIfExist(elem, ".number");
 		const displayName = elem.getAttribute("data-username").toLocaleLowerCase();
@@ -34,4 +35,4 @@
 		const target = elem.querySelector(selector);
 		return target ? target.innerText : "";
 	}
-}
+});

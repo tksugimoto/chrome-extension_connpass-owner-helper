@@ -3,7 +3,8 @@
 申込者の管理ページでアンケート結果を集計
 */
 
-{
+Setting.get("count_questionnaire").then(isEnabled => {
+	if (!isEnabled) return;
 	const container = document.createElement("ol");
 	container.style.listStyleType = "decimal";
 	container.style.webkitPaddingStart = "30px";
@@ -80,4 +81,4 @@
 		containerLi.appendChild(details);
 		container.appendChild(containerLi);
 	});
-}
+});

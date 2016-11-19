@@ -7,11 +7,18 @@
 	"permissions": [
 		"storage"
 	],
+
+	"options_page": "options.html",
+	"browser_action": {
+		"default_popup": "options.html"
+	},
+
 	"content_scripts": [{
 		"matches": [
 			"*://connpass.com/event/*/participants/*"
 		],
 		"js": [
+			"settigns.js",
 			"content_scripts/record-sub-entry.js",
 			"content_scripts/search-participant.js",
 			"content_scripts/count_questionnaire.js"
