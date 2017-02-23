@@ -5,11 +5,30 @@
 
 Setting.get("search_participant").then(isEnabled => {
 	if (!isEnabled) return;
-	const participants = Array.from(document.querySelectorAll(".ParticipantView")).map(elem => {
-		const number = getTextIfExist(elem, ".number");
-		const displayName = elem.getAttribute("data-username").toLocaleLowerCase();
-		const userName = getTextIfExist(elem, ".user_name").toLocaleLowerCase();
-		return {elem, number, displayName, userName};
+	const participantsTables = Array.from(document.querySelectorAll(".participants_table")).map(table => {
+		const participants = Array.from(table.querySelectorAll(".ParticipantView")).map(elem => {
+			const number = getTextIfExist(elem, ".number");
+			const displayName = elem.getAttribute("data-username").toLocaleLowerCase();
+			const userName = getTextIfExist(elem, ".user_name").toLocaleLowerCase();
+			return {elem, number, displayName, userName};
+		});
+		return {
+			showAll: () => {
+				participants.forEach(({elem}) => {
+					elem.style.display = "";
+				});
+				table.style.display = "";
+			},
+			filterByText: value => {
+				const matchCount = participants.reduce((count, {elem, number, displayName, userName}) => {
+					const isMatch = number.includes(value) || displayName.includes(value) || userName.includes(value);
+					elem.style.display = isMatch ? "" : "none";
+					if (isMatch) count++;
+					return count;
+				}, 0);
+				table.style.display = matchCount > 0 ? "" : "none";
+			}
+		};
 	});
 	const entryTable = document.querySelector(".entirety_area ");
 	const container = document.createElement("div");
@@ -20,10 +39,7 @@ Setting.get("search_participant").then(isEnabled => {
 	input.placeholder = "受付番号・参加者名・IDで検索（大文字小文字無視）";
 	input.addEventListener("keyup", () => {
 		const value = input.value.toLocaleLowerCase();
-		participants.forEach(({elem, number, displayName, userName}) => {
-			const isMatch = number.includes(value) || displayName.includes(value) || userName.includes(value);
-			elem.style.display = isMatch ? "" : "none";
-		});
+		participantsTables.forEach(pt => pt.filterByText(value));
 	});
 	input.addEventListener("focus", () => {
 		input.select();
@@ -36,9 +52,7 @@ Setting.get("search_participant").then(isEnabled => {
 	clearButton.style.cursor = "pointer";
 	clearButton.addEventListener("click", () => {
 		input.value = "";
-		participants.forEach(({elem}) => {
-			elem.style.display = "";
-		});
+		participantsTables.forEach(pt => pt.showAll());
 		input.focus();
 	});
 	container.appendChild(clearButton);
