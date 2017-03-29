@@ -71,7 +71,7 @@ Setting.get("count_questionnaire").then(isEnabled => {
 		ul.style.webkitPaddingStart = "20px";
 
 		const answers = result.answers;
-		Object.keys(answers).forEach(key => {
+		Object.keys(answers).sort().forEach(key => {
 			const count = answers[key];
 			const li = document.createElement("li");
 			li.innerText = `${key}: ${count.participantCount} + ${count.waitingCount}`;
