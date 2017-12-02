@@ -1,0 +1,25 @@
+
+<template>
+	<style>
+		input:checked + span  {
+			font-weight: bold;
+		}
+		
+		input,
+		label {
+			cursor: pointer;
+			-webkit-user-select: none;
+		}
+		label > input,
+		label > span {
+			vertical-align: middle;
+		}
+	</style>
+	<label>
+		<input type="checkbox">
+		<span>
+			<slot></slot>
+		</span>
+	</label>
+</template>
+<script src="check-box.js"></script>
