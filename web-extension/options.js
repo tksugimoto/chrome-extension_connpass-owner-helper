@@ -2,15 +2,21 @@
 const setting_container = document.getElementById("setting_container");
 Setting.getAll().then(settings => {
 	settings.forEach(setting => {
-		const checkBox = document.createElement("check-box");
+		const checkBox = document.createElement("input");
+		checkBox.type = "checkbox";
 		checkBox.checked = setting.value;
-		checkBox.innerText = setting.name;
-		checkBox.addEventListener("change", ({checked}) => {
-			Setting.set(setting.key, checked);
+		const span = document.createElement("span");
+		span.innerText = setting.name;		
+		checkBox.addEventListener("change", () => {
+			Setting.set(setting.key, checkBox.checked);
 		});
 
+		const label = document.createElement("label");
+		label.append(checkBox);
+		label.append(span);
+
 		const li = document.createElement("li");
-		li.appendChild(checkBox);
+		li.appendChild(label);
 		setting_container.appendChild(li);
 	});
 });
