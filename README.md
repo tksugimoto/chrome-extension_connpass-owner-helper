@@ -1,8 +1,12 @@
-# chrome-extension_connpass-owner-helper
+# ブラウザ拡張: connpass-owner-helper
 http://connpass.com/ のイベント管理者用
 
-## Chromeストア
+## インストール
+### Chromeユーザー
 [connpass owner helper - Chrome ウェブストア](https://chrome.google.com/webstore/detail/connpass-owner-helper/pheokigeoeccpepmmnbjhjheadfajhdf "https://chrome.google.com/webstore/detail/connpass-owner-helper/pheokigeoeccpepmmnbjhjheadfajhdf")
+
+### Firefoxユーザー
+[connpass owner helper – Firefox 向けアドオン](https://addons.mozilla.org/ja/firefox/addon/connpass-owner-helper/ "https://addons.mozilla.org/ja/firefox/addon/connpass-owner-helper/")
 
 ## 機能
 * 申込者の管理ページでアンケート結果を集計
@@ -15,4 +19,4 @@ http://connpass.com/ のイベント管理者用
   * データはローカルに保存（= PCごと）
 
 ## 注意事項
-非公式Chrome拡張です
+非公式Chrome/Firefox拡張です

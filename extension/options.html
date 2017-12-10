@@ -3,12 +3,25 @@
 <head>
 	<meta charset="utf-8">
 	<title>設定（connpass owner helper）</title>
-	<link rel="import" href="web-components/check-box.html">
 	<style>
 		body {
 			width: 800px;
 			margin: 0 auto;
 			padding: 20px;
+		}
+
+		input:checked + span  {
+			font-weight: bold;
+		}
+		input,
+		label {
+			cursor: pointer;
+			user-select: none;
+			-moz-user-select: none;
+		}
+		label > input,
+		label > span {
+			vertical-align: middle;
 		}
 	</style>
 </head>
