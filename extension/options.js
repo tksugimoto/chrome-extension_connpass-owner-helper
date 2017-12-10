@@ -6,7 +6,7 @@ Setting.getAll().then(settings => {
 		checkBox.type = "checkbox";
 		checkBox.checked = setting.value;
 		const span = document.createElement("span");
-		span.innerText = setting.name;		
+		span.innerText = setting.name;
 		checkBox.addEventListener("change", () => {
 			Setting.set(setting.key, checkBox.checked);
 		});
