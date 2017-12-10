@@ -1,0 +1,28 @@
+{
+	"name": "connpass owner helper",
+	"version": "0.8.0",
+	"manifest_version": 2,
+	"description": "http://connpass.com/ のイベント管理者用サポートツール",
+	"permissions": [
+		"storage"
+	],
+
+	"options_ui": {
+		"page": "options.html"
+	},
+	"browser_action": {
+		"default_popup": "options.html"
+	},
+
+	"content_scripts": [{
+		"matches": [
+			"*://connpass.com/event/*/participants/*"
+		],
+		"js": [
+			"settigns.js",
+			"content_scripts/record-sub-entry.js",
+			"content_scripts/search-participant.js",
+			"content_scripts/count_questionnaire.js"
+		]
+	}]
+}
