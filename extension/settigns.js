@@ -1,16 +1,16 @@
 
 const Setting = {
 	settings: [{
-		name: "参加者・補欠者を検索（フィルタリング）する",
-		key: "search_participant",
+		name: '参加者・補欠者を検索（フィルタリング）する',
+		key: 'search_participant',
 		defaultValue: true,
 	}, {
-		name: "アンケートの回答を集計する",
-		key: "count_questionnaire",
+		name: 'アンケートの回答を集計する',
+		key: 'count_questionnaire',
 		defaultValue: true,
 	}, {
-		name: "懇親会参加の有無の記録",
-		key: "record_sub_entry",
+		name: '懇親会参加の有無の記録',
+		key: 'record_sub_entry',
 		defaultValue: true,
 	}],
 
