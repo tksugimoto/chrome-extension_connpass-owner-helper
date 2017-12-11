@@ -38,7 +38,7 @@ Setting.get('count_questionnaire').then(isEnabled => {
 		const isWaiting = !!elem.closest('.waitlist_table_area');
 		return Array.from(elem.querySelectorAll('.answer')).map((answerElem, i) => {
 			return {
-				isWaiting: isWaiting,
+				isWaiting,
 				question: questions[i].innerText,
 				answer: answerElem.innerText,
 			};
