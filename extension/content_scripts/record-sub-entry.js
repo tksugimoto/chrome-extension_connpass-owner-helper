@@ -22,21 +22,21 @@ Setting.get('record_sub_entry').then(isEnabled => {
 			subCheckedinCountElem,
 			updateEntryListDownloadLink,
 		} = (() => {
-			const subCheckedinCountElem = document.createElement('span');
+			const _subCheckedinCountElem = document.createElement('span');
 			const container = document.createElement('a');
 			container.href = '#';
 			container.target = '_blank';
 			container.download = `${eventTitle}-懇親会参加者一覧.json`;
 			container.title = '懇親会参加者数（クリックで一覧をダウンロード）';
 			container.appendChild(document.createTextNode('（'));
-			container.appendChild(subCheckedinCountElem);
+			container.appendChild(_subCheckedinCountElem);
 			container.appendChild(document.createTextNode('人）'));
 
 			const parent = document.getElementById('CheckedinCount').parentNode;
 			parent.appendChild(container);
 
-			const updateEntryListDownloadLink = (entryList) => {
-				let text = `懇親会参加者（${entryList.length}人）\n` + entryList.map(entry => entry.displayName).join('\n');
+			const _updateEntryListDownloadLink = (_entryList) => {
+				let text = `懇親会参加者（${_entryList.length}人）\n` + _entryList.map(entry => entry.displayName).join('\n');
 				let blob = new Blob([
 					text,
 				], {
@@ -45,8 +45,8 @@ Setting.get('record_sub_entry').then(isEnabled => {
 				container.href = window.URL.createObjectURL(blob);
 			};
 			return {
-				subCheckedinCountElem,
-				updateEntryListDownloadLink,
+				subCheckedinCountElem: _subCheckedinCountElem,
+				updateEntryListDownloadLink: _updateEntryListDownloadLink,
 			};
 		})();
 

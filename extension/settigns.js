@@ -46,9 +46,9 @@ const Setting = {
 
 	getAll() {
 		return new Promise(resolve => {
-			const keys = this.settings.reduce((keys, {key, defaultValue}) => {
-				keys[key] = defaultValue;
-				return keys;
+			const keys = this.settings.reduce((_keys, {key, defaultValue}) => {
+				_keys[key] = defaultValue;
+				return _keys;
 			}, {});
 			chrome.storage.local.get(keys, items => {
 				const results = this.settings.map(({name, key}) => {
