@@ -89,7 +89,7 @@ Setting.get('record_sub_entry').then(isEnabled => {
 			label.appendChild(document.createTextNode('懇親会参加'));
 			elem.querySelector('.id').appendChild(label);
 
-			checkbox.addEventListener('change', evt => {
+			checkbox.addEventListener('change', () => {
 				const userDisplayName = elem.getAttribute('data-username');
 				const value = checkbox.checked;
 				updateEntryList(userId, userDisplayName, value);
