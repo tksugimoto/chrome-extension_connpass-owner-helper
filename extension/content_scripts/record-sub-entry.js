@@ -20,7 +20,7 @@ Setting.get("record_sub_entry").then(isEnabled => {
 
 		const {
 			subCheckedinCountElem,
-			updateEntryListDownloadLink
+			updateEntryListDownloadLink,
 		} = (() => {
 			const subCheckedinCountElem = document.createElement("span");
 			const container = document.createElement("a");
@@ -38,15 +38,15 @@ Setting.get("record_sub_entry").then(isEnabled => {
 			const updateEntryListDownloadLink = (entryList) => {
 				let text = `懇親会参加者（${entryList.length}人）\n` + entryList.map(entry => entry.displayName).join("\n");
 				let blob = new Blob([
-					text
+					text,
 				], {
-					type: "application/json"
+					type: "application/json",
 				});
 				container.href = window.URL.createObjectURL(blob);
 			};
 			return {
 				subCheckedinCountElem,
-				updateEntryListDownloadLink
+				updateEntryListDownloadLink,
 			};
 		})();
 
@@ -62,14 +62,14 @@ Setting.get("record_sub_entry").then(isEnabled => {
 				if (value) {
 					entryList.push({
 						id: userId,
-						displayName: userDisplayName
+						displayName: userDisplayName,
 					});
 				}
 				subCheckedinCountElem.innerText = entryList.length;
 				updateEntryListDownloadLink(entryList);
 				return new Promise(resolve => {
 					chrome.storage.local.set({
-						[eventId]: {eventTitle, entryList}
+						[eventId]: {eventTitle, entryList},
 					}, resolve);
 				});
 			});

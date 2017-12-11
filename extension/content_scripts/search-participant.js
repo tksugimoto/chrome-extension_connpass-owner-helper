@@ -27,7 +27,7 @@ Setting.get("search_participant").then(isEnabled => {
 					return count;
 				}, 0);
 				table.style.display = matchCount > 0 ? "" : "none";
-			}
+			},
 		};
 	});
 	const entryTable = document.querySelector(".entirety_area ");

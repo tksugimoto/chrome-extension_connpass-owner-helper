@@ -40,7 +40,7 @@ Setting.get("count_questionnaire").then(isEnabled => {
 			return {
 				isWaiting: isWaiting,
 				question: questions[i].innerText,
-				answer: answerElem.innerText
+				answer: answerElem.innerText,
 			};
 		});
 	}).reduce((flat, toFlatten) => {
@@ -51,7 +51,7 @@ Setting.get("count_questionnaire").then(isEnabled => {
 		if (!result) {
 			result = {
 				question: enquete.question,
-				answers: {}
+				answers: {},
 			};
 			results.push(result);
 		}

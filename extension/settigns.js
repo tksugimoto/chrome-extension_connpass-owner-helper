@@ -3,15 +3,15 @@ const Setting = {
 	settings: [{
 		name: "参加者・補欠者を検索（フィルタリング）する",
 		key: "search_participant",
-		defaultValue: true
+		defaultValue: true,
 	}, {
 		name: "アンケートの回答を集計する",
 		key: "count_questionnaire",
-		defaultValue: true
+		defaultValue: true,
 	}, {
 		name: "懇親会参加の有無の記録",
 		key: "record_sub_entry",
-		defaultValue: true
+		defaultValue: true,
 	}],
 
 	get(key) {
@@ -19,7 +19,7 @@ const Setting = {
 			const setting = this.settings.find(s => s.key === key);
 			if (setting) {
 				chrome.storage.local.get({
-					[setting.key]: setting.defaultValue
+					[setting.key]: setting.defaultValue,
 				}, items => {
 					resolve(items[setting.key]);
 				});
@@ -35,7 +35,7 @@ const Setting = {
 			const setting = this.settings.find(s => s.key === key);
 			if (setting) {
 				chrome.storage.local.set({
-					[setting.key]: value
+					[setting.key]: value,
 				}, resolve);
 			} else {
 				console.error(`setting "${key}" does not exist`);
@@ -54,11 +54,11 @@ const Setting = {
 				const results = this.settings.map(({name, key}) => {
 					const value = items[key];
 					return {
-						name, key, value
+						name, key, value,
 					};
 				});
 				resolve(results);
 			});
 		});
-	}
+	},
 };
