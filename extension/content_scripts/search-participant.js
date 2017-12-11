@@ -53,7 +53,7 @@ Setting.get('search_participant').then(isEnabled => {
 
 	const clearButton = document.createElement('input');
 	clearButton.type = 'button';
-	clearButton.value = 'クリア'
+	clearButton.value = 'クリア';
 	clearButton.style.cursor = 'pointer';
 	clearButton.addEventListener('click', () => {
 		input.value = '';
