@@ -14,7 +14,7 @@ const Setting = {
 		defaultValue: true
 	}],
 
-	get: function (key) {
+	get(key) {
 		return new Promise(resolve => {
 			const setting = this.settings.find(s => s.key === key);
 			if (setting) {
@@ -30,7 +30,7 @@ const Setting = {
 		});
 	},
 
-	set: function (key, value) {
+	set(key, value) {
 		return new Promise(resolve => {
 			const setting = this.settings.find(s => s.key === key);
 			if (setting) {
@@ -44,7 +44,7 @@ const Setting = {
 		});
 	},
 
-	getAll: function () {
+	getAll() {
 		return new Promise(resolve => {
 			const keys = this.settings.reduce((keys, {key, defaultValue}) => {
 				keys[key] = defaultValue;
