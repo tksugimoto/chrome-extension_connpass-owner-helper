@@ -3,7 +3,7 @@
 申込者の管理ページでアンケート結果を集計
 */
 
-Setting.get('count_questionnaire').then(isEnabled => {
+window.Setting.get('count_questionnaire').then(isEnabled => {
 	if (!isEnabled) return;
 	const container = document.createElement('ol');
 	container.style.listStyleType = 'decimal';

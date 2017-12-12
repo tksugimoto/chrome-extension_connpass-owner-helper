@@ -1,5 +1,5 @@
 
-const Setting = {
+window.Setting = {
 	settings: [{
 		name: '参加者・補欠者を検索（フィルタリング）する',
 		key: 'search_participant',

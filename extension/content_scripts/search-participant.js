@@ -3,7 +3,7 @@
 申込者の管理ページで検索機能（受付時の確認を楽にする）
 */
 
-Setting.get('search_participant').then(isEnabled => {
+window.Setting.get('search_participant').then(isEnabled => {
 	if (!isEnabled) return;
 	const participantsTables = Array.from(document.querySelectorAll('.participants_table')).map(table => {
 		const participants = Array.from(table.querySelectorAll('.ParticipantView')).map(elem => {

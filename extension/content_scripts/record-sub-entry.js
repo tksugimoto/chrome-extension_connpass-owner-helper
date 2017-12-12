@@ -3,7 +3,7 @@
 出欠席以外に懇親会の出欠も確認する
 */
 
-Setting.get('record_sub_entry').then(isEnabled => {
+window.Setting.get('record_sub_entry').then(isEnabled => {
 	if (!isEnabled) return;
 	function loadSavedEntryList(eventId) {
 		return new Promise(resolve => {
